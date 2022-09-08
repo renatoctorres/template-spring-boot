@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
-
+import java.util.Optional;
 
 @Service
 public class EmployerService {
@@ -23,16 +23,18 @@ public class EmployerService {
         return save(dto);
     }
 
-    private EmployerDTO save(EmployerDTO dto) {
+    EmployerDTO save(EmployerDTO dto) {
         Employer employer =  this.repository.save(converter.toModel(dto));
         return converter.fromModel(employer);
     }
 
     public EmployerDTO findById(Long id) {
-        if (this.repository.findById(id).isEmpty()){
+        Optional<Employer> optEmployer = this.repository.findById(id);
+        if (optEmployer.isEmpty()){
             throw new NoSuchElementFoundException();
+        }else{
+            return converter.fromModel(optEmployer.get());
         }
-        return converter.fromModel(this.repository.findById(id).get());
 
     }
 
@@ -44,14 +46,9 @@ public class EmployerService {
 
     }
 
-    public void delete(EmployerDTO dto) {
-        this.repository.delete(converter.toModel(dto));
-    }
-
     public void deleteById(Long id) {
         this.repository.deleteById(id);
     }
-
     public EmployerDTO update(EmployerDTO dto) {
         return save(dto);
     }
