@@ -21,7 +21,6 @@ public class DepartmentService {
     DepartmentRepository repository;
     @Autowired
     EmployerRepository employerRepository;
-
     @Autowired
     DepartmentConverter converter;
     @Autowired
