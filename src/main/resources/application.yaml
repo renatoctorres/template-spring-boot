@@ -1,0 +1,23 @@
+springdoc:
+  show-actuator: 'true'
+spring:
+  datasource:
+    username: sa
+    password: ''
+    url: jdbc:h2:file:./demodb
+    driverClassName: org.h2.Driver
+  jpa:
+    defer-datasource-initialization: 'true'
+    show-sql: 'true'
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+server:
+  error:
+    include-stacktrace: never
+    include-exception: 'false'
+    include-binding-errors: always
+    include-message: always
